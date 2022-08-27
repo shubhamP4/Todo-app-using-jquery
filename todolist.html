@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Input box</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>  
+</head>
+<body>
+    <div class="container card mt-5">
+        <div class="row ">
+            <div class="col">
+                <input type="text" class="form-control" id="title" placeholder="Enter Title">
+                <span id="title-error-message"></span>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" id="description" placeholder="Enter Description">
+            </div>
+            <div class="col">
+            <button type="button" class="btn btn-primary add-btn">Add</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <table class="card table table-bordered mt-4" width="100%">
+            <thead>
+                <tr>
+                    <th>Sr.no</th>
+                    <th>Task</th>
+                    <th>Description</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+               
+            </tbody>
+        </table>
+    </div>
+<script>
+    $(document).ready(function(){
+        var srno = 0;
+        
+        $(".add-btn").click(function(e){
+            var inputValue = $('#title').val();
+            var description = $('#description').val();
+            $('#title, #description').val('');
+            if(inputValue.length< 1){
+                alert("Please enter the title");
+            }
+            else if(description.length< 1){
+                alert("Please enter the description");
+            }
+            else{
+                srno++;
+                $("tbody").append('<tr><td>'+srno+'</td><td>'+inputValue+'</td><td>'+description+'</td><td><button class="btn btn-sm btn-danger" id="btn-delete">Delete</button></td></tr>');
+            }
+        });
+        $("tbody").on("click","#btn-delete",function(){
+            $(this).parent("td").parent("tr").remove(); srno--;
+        });
+    });
+</script>
+
+</body>  
+</html> 
